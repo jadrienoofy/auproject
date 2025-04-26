@@ -1,0 +1,198 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* Login CSS */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    padding-top: 60px;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: auto;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+}
+.header img {
+    height: 70px;
+    align-items: center;
+    margin-left: 30px;
+}
+
+.signup p {
+    margin-top: -20px;
+}
+.hr-text {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.hr-text::before, .hr-text::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid black;
+    margin: 5px;
+}
+
+h2 {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form input {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.form input:focus {
+    border-color: #ff8700;
+    box-shadow: 0 0 4px rgba(255, 135, 0, 0.6);
+}
+
+button {
+    background-color: #B2A4D4;
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #8f83ab;
+}
+
+a {
+    color: #B2A4D4;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p {
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+}
+
+p a {
+    color: #B2A4D4;
+}
+
+.fbimage img {
+    height: 41px;
+    margin-left: 40px;
+}
+.google-con {
+    display: flex;
+    justify-content: center;
+    margin: 3px 0px 40px 5px;
+}
+.google-con img {
+    height: 39px;
+    justify-content: center;
+    align-items: center;
+    margin-top: -60px;
+    margin-bottom: 20px;
+}
+.apple-con {
+    display: flex;
+    justify-content: center;
+    margin: -100px 30px 0px 0px;
+    float: right;
+}
+.apple-con img {
+    height: 55px;
+    margin: -15px 0px 10px 0px;
+}
+@media (max-width: 768px) {
+    /* Login CSS */
+    .container {
+        flex-direction: column;
+        padding-top: 20px;
+    }
+
+    .form-container {
+        width: 90%;
+        margin-top: 20px;
+    }
+    .fbimage img {
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Login CSS */
+    .form-container {
+        width: 100%;
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    .form input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 12px;
+    }
+    .signup p {
+        margin-top: 20px;
+    }
+    .google-con {
+        margin: 0px 1px 0px 0px;
+    }
+    .apple-con {
+        margin-top: -60px;
+    }
+    .fbimage img {
+        height: 45px;
+        margin-left: 30px;
+    }
+    .header img {
+        margin-left: 10px;
+    }
+}

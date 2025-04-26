@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking | MKJE Shop</title>
+    <link rel="icon" href="images/icong.png">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+      
+        /* Existing styles */
+        .order-sections-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+   
+        }
+
+        .order-section {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .order-section h2 {
+            color: #B2A4D4;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .order-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            justify-content: space-between; /* Added to space out details and actions */
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-details {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .item-details img {
+            max-width: 80px;
+            height: auto;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .item-info p {
+            margin: 5px 0;
+        }
+
+        .order-actions button {
+            padding: 8px 12px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+
+        .order-actions .cancel {
+            background-color: #f44336; /* Red for cancel */
+            color: white;
+        }
+
+        .order-actions .cancel:hover {
+            background-color: #d32f2f;
+        }
+
+        .order-actions .details {
+            background-color: #2196F3; /* Blue for details */
+            color: white;
+        }
+        .details {
+            margin-top: 20px;
+            background-color: #B2A4D4;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            justify-content: right;
+            font-size: 1em;
+            margin-left: 10px;
+        }
+
+        .order-actions .details:hover {
+            background-color: #1976D2;
+        }
+
+        .order-status {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: #fff;
+            margin-left: 5px;
+        }
+
+
+        .status-to_deliver {
+            background-color: #2196F3; /* Blue */
+            margin-left: -10px;
+            margin-top: -40px;
+        }
+
+        .status-completed {
+            background-color: #4CAF50; /* Green */
+        }
+
+        .status-cancelled {
+            background-color: #f44336; /* Red */
+        }
+
+        .time-left {
+            display: none;
+        }
+
+        .time-left .past-due {
+            color: red;
+        }
+
+        .tracking-info {
+            font-size: 0.9em;
+            color: #555;
+            margin-left: 10px;
+        }
+
+        .empty-message {
+            color: #777;
+            font-style: italic;
+            padding: 10px 0;
+        }
+
+        #to-ship-summary {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+            font-weight: bold;
+        }
+
+        .cancel-button-small {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8em;
+            margin-top: 8px;
+            margin-left: auto;
+            display: block;
+            width: fit-content;
+}
+
+
+        .cancel-button-small:hover {
+            background-color: #d32f2f;
+        }
+        button {
+            background-color: #B2A4D4;
+            border: none;
+            border-radius: 8px;
+            padding-top: 5px;
+            padding-right: 6px;
+            margin-left: 30px;
+        }
+        button img {
+            height: 30px;
+        }
+        @media (max-width: 768px) {
+            body {
+            margin: 50px auto 10px auto;
+        }
+            .main-header {
+                margin-top: -50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="MKJE Shop Logo">
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products...">
+                <button type="submit">
+                    <div class="search">
+                        <img src="images/search.webp" alt="Search Icon">
+                    </div>
+                </button>
+            </div>
+            <nav class="header-icons">
+                <div class="icons">
+                    <a href="basket.html"><img src="images/cart.png" alt="Cart"></a>
+                </div>
+                <div class="notif">
+                    <a href="#"><img src="images/notif.png" alt="Notifications"></a>
+                    <div class="notif-dropdown"><hr>
+                        <ul>
+                            <p>No Notifications</p>
+                        </ul>
+                    </div>
+                </div>
+                <div class="acc">
+                    <a href="#"><img src="images/acc.webp" alt="Account"></a>
+                    <div class="dropdown">
+                        <ul>
+                            <li><a href="account.html">Profile</a></li>
+                            <li><a href="received_items.html">Orders</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="login.html">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Hamburger Button -->
+                    <div class="hamburger" onclick="toggleMenu()">
+                      ☰
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div class="mobile-menu" id="mobileMenu">
+                      <a href="homepage.html">Home</a>
+                      <a href="basket.html">Cart</a>
+                      <a href="received_items.html">Orders</a>
+                      <a href="#notif">Notifications</a>
+                      <a href="account.html">Account</a>
+                      <a href="login.html">Logout</a>
+                    </div>
+                     <div class="backdrop" id="backdrop" onclick="closeMenu()"></div>
+            </nav>
+        </div>
+    </header>
+    <br><br>
+    <button style="position: relative;">
+        <a href="homepage.html"><img src="images/home.png"></a>
+    </button>
+    <div class="order-sections-container">
+        <div class="order-section" id="to-ship-section">
+            <h2>To Ship</h2>
+            <ul class="order-list" id="to-ship-list">
+            </ul>
+            <div id="to-ship-summary"></div>
+        </div>
+        <div class="order-section" id="to-deliver-section">
+            <h2>To Deliver</h2>
+            <ul class="order-list" id="to-deliver-list">
+            </ul>
+            <div id="to-deliver-empty" class="empty-message" style="display:none;">No items to deliver yet.</div>
+        </div>
+        <div class="order-section" id="order-complete-section">
+            <h2>Order Complete</h2>
+            <ul class="order-list" id="order-complete-list">
+            </ul>
+            <div id="order-complete-empty" class="empty-message" style="display:none;">No completed orders yet.</div>
+        </div>
+        <div class="order-section" id="cancelled-orders-section">
+            <h2>Cancelled Orders</h2>
+            <ul class="order-list" id="cancelled-orders-list">
+            </ul>
+            <div id="cancelled-orders-empty" class="empty-message" style="display:none;">No cancelled orders.</div>
+        </div>
+    </div>
+    <footer style="background-color: #B2A4D4; height: 350px; margin-top: 126px;">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>CUSTOMER SERVICE</h4>
+                    <ul>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>ABOUT MKJE Shop</h4>
+                    <ul>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>PAYMENT</h4>
+                    <ul>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                    </ul>
+                </div>
+            </div><hr>
+            <p>&copy; <span id="currentYear"></span> MKJE Shop. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+let allOrders = JSON.parse(localStorage.getItem('received')) || [];
+
+const toShipList = document.getElementById('to-ship-list');
+const toDeliverList = document.getElementById('to-deliver-list');
+const orderCompleteList = document.getElementById('order-complete-list');
+const cancelledOrdersList = document.getElementById('cancelled-orders-list');
+const toShipSummaryDiv = document.getElementById('to-ship-summary');
+const toDeliverEmptyDiv = document.getElementById('to-deliver-empty');
+const orderCompleteEmptyDiv = document.getElementById('order-complete-empty');
+const cancelledOrdersEmptyDiv = document.getElementById('cancelled-orders-empty');
+
+function displayOrders() {
+    toShipList.innerHTML = '';
+    toDeliverList.innerHTML = '';
+    orderCompleteList.innerHTML = '';
+    cancelledOrdersList.innerHTML = '';
+
+    let toShipTotalPrice = 0;
+    let toShipItemCount = 0;
+    let hasToDeliver = false;
+    let hasCompleted = false;
+    let hasCancelled = false;
+
+    allOrders.forEach((order, index) => {
+        const listItem = document.createElement('li');
+        listItem.classList.add('order-item');
+
+        const itemDetails = document.createElement('div');
+        itemDetails.classList.add('item-details');
+
+        const img = document.createElement('img');
+        img.src = order.items[0].img;
+        img.alt = order.items[0].name;
+
+        const itemInfo = document.createElement('div');
+        itemInfo.classList.add('item-info');
+        let itemNames = order.items.map(item => 
+            `<li>${item.name} (Qty: ${item.quantity || 1}, Price: ₱${parseFloat(item.price).toFixed(2)})</li>`
+        ).join('');
+        itemInfo.innerHTML = `
+            <p><strong>Order ID: ${order.orderId}</strong></p>
+            <p>Order Date: ${order.orderDate}</p>
+            <p>Payment Method: ${order.paymentMethod}</p>
+            <p>Shipping To: ${order.shippingAddress}</p>
+            <ul>${itemNames}</ul>
+            <p>Total: ₱${parseFloat(order.totalAmount.replace('₱', '')).toFixed(2)}</p>
+        `;
+
+        itemDetails.appendChild(img);
+        itemDetails.appendChild(itemInfo);
+
+        const rightSide = document.createElement('div');
+        const statusSpan = document.createElement('span');
+        statusSpan.classList.add('order-status', `status-${order.status}`);
+        statusSpan.textContent = order.status.replace('_', ' ').toUpperCase();
+        rightSide.appendChild(statusSpan);
+
+        if (order.status === 'to_ship') {
+            const timeLeft = calculateTimeLeft(order.shipmentDate);
+            const timeLeftSpan = document.createElement('span');
+            timeLeftSpan.classList.add('time-left');
+            timeLeftSpan.innerHTML = timeLeft;
+            rightSide.appendChild(timeLeftSpan);
+
+            const cancelButton = document.createElement('button');
+            cancelButton.textContent = 'Cancel';
+            cancelButton.classList.add('cancel-button-small');
+            cancelButton.addEventListener('click', (event) => {
+                event.stopPropagation();
+                confirmCancelOrder(index);
+            });
+            itemInfo.appendChild(document.createElement('br'));
+                itemInfo.appendChild(cancelButton);
+
+
+            toShipList.appendChild(listItem);
+            listItem.appendChild(itemDetails);
+            listItem.appendChild(rightSide);
+            toShipTotalPrice += parseFloat(order.totalAmount.replace('₱', ''));
+            toShipItemCount += order.items.reduce((sum, item) => sum + (item.quantity || 1), 0);
+        } else if (order.status === 'to_deliver') {
+            hasToDeliver = true;
+            const trackingInfo = document.createElement('span');
+            trackingInfo.classList.add('tracking-info');
+            trackingInfo.textContent = 'Tracking: Not Available (Simulated)';
+            rightSide.appendChild(trackingInfo);
+
+            const cancelButton = document.createElement('button');
+cancelButton.textContent = 'Cancel';
+cancelButton.classList.add('cancel-button-small');
+cancelButton.style.marginTop = '8px';
+cancelButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    confirmCancelOrder(index);
+});
+itemInfo.appendChild(cancelButton); // 👈 Move inside item info too
+
+
+            toDeliverList.appendChild(listItem);
+            listItem.appendChild(itemDetails);
+            listItem.appendChild(rightSide);
+        } else if (order.status === 'completed') {
+            hasCompleted = true;
+            const detailsButton = document.createElement('button');
+            detailsButton.textContent = 'Details';
+            detailsButton.classList.add('details');
+            detailsButton.addEventListener('click', () => {
+                alert(`Details for Completed Order ID: ${order.orderId}
+Items: ${order.items.map(item => item.name).join(', ')}
+Shipping Address: ${order.shippingAddress}
+Contact: ${order.contactNumber}
+Payment: ${order.paymentMethod}
+Total: ${order.totalAmount}
+Completed On: ${order.completedDate}`);
+            });
+            rightSide.appendChild(detailsButton);
+            orderCompleteList.appendChild(listItem);
+            listItem.appendChild(itemDetails);
+            listItem.appendChild(rightSide);
+        } else if (order.status === 'cancelled') {
+            hasCancelled = true;
+            const detailsButton = document.createElement('button');
+            detailsButton.textContent = 'Details';
+            detailsButton.classList.add('details');
+            detailsButton.addEventListener('click', () => {
+                alert(`Details for Cancelled Order ID: ${order.orderId}
+Items: ${order.items.map(item => item.name).join(', ')}
+Shipping Address: ${order.shippingAddress}
+Contact: ${order.contactNumber}
+Payment: ${order.paymentMethod}
+Total: ${order.totalAmount}`);
+            });
+            rightSide.appendChild(detailsButton);
+            cancelledOrdersList.appendChild(listItem);
+            listItem.appendChild(itemDetails);
+            listItem.appendChild(rightSide);
+        }
+    });
+
+    toShipSummaryDiv.innerHTML = toShipList.children.length > 0
+        ? `Total Items: ${toShipItemCount}, Combined Price: ₱${toShipTotalPrice.toFixed(2)}`
+        : '';
+    toDeliverEmptyDiv.style.display = hasToDeliver ? 'none' : 'block';
+    orderCompleteEmptyDiv.style.display = hasCompleted ? 'none' : 'block';
+    cancelledOrdersEmptyDiv.style.display = hasCancelled ? 'none' : 'block';
+}
+
+function calculateTimeLeft(shipmentDate) {
+    const shipDate = new Date(shipmentDate);
+    const now = new Date();
+    const diffInMilliseconds = shipDate.getTime() - now.getTime();
+    const diffInDays = Math.ceil(diffInMilliseconds / (1000 * 60 * 60 * 24));
+
+    if (diffInDays > 0) {
+        return `Ships in ${diffInDays} day${diffInDays > 1 ? 's' : ''}`;
+    } else if (diffInDays === 0) {
+        return "Ships today";
+    } else {
+        return `<span class="past-due">Past shipment date</span>`;
+    }
+}
+
+function confirmCancelOrder(index) {
+    if (confirm("Are you sure you want to cancel this order?")) {
+        cancelOrder(index);
+    }
+}
+
+function cancelOrder(index) {
+    const orderToCancel = allOrders[index];
+    if (orderToCancel.status === 'to_ship' || orderToCancel.status === 'to_deliver') {
+        orderToCancel.status = 'cancelled';
+        localStorage.setItem('received', JSON.stringify(allOrders));
+        displayOrders();
+        alert("Order Cancelled");
+    } else {
+        alert("This order cannot be cancelled as it is already being processed or completed.");
+    }
+}
+
+function updateOrderStatuses() {
+    const now = new Date();
+    allOrders = allOrders.map(order => {
+        if (order.status === 'to_ship' && order.shipmentDate) {
+            const shippedDate = new Date(order.shipmentDate);
+            const timeDiff = now - shippedDate;
+            const daysPassed = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            if (daysPassed >= 4) {
+                order.status = 'to_deliver';
+                order.deliveryDate = now.toISOString().split('T')[0];
+            }
+        } else if (order.status === 'to_deliver' && order.deliveryDate) {
+            const deliveryDate = new Date(order.deliveryDate);
+            const timeDiff = now - deliveryDate;
+            const daysPassed = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            if (daysPassed >= 3) {
+                order.status = 'completed';
+                order.completedDate = now.toISOString().split('T')[0];
+            }
+        }
+        return order;
+    });
+    localStorage.setItem('received', JSON.stringify(allOrders));
+    displayOrders();
+}
+
+updateOrderStatuses();
+displayOrders();
+function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const backdrop = document.getElementById('backdrop');
+    
+            menu.classList.toggle('show');
+            hamburger.classList.toggle('hide');
+            backdrop.style.display = menu.classList.contains('show') ? 'block' : 'none';
+        }
+    
+        function closeMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const backdrop = document.getElementById('backdrop');
+    
+            menu.classList.remove('show');
+            hamburger.classList.remove('hide');
+            backdrop.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

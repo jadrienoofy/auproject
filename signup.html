@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | MKJE Shop</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="header">
+                <h2 id="formTitle"><img src="images/logologin.png"></h2>
+            </div>
+
+            <form id="signUpForm" onsubmit="return registerUser()" class="form">
+                <input type="text" id="signUpUser" placeholder="Username">
+                <div class="error-message" id="signupUsernameError"></div>
+                <input type="password" id="signUpPass" placeholder="Password">
+                <div class="error-message" id="signupPasswordError"></div>
+                <button type="submit">Sign Up</button>
+                <div class="hr-text">OR</div>
+                <div class="fb-con">
+                    <div class="fbimage">
+                        <a href="#"><img src="images/fb.webp"></a>
+                    </div>
+                    <div class="google-con">
+                        <a href="#"><img src="images/google.png"></a>
+                    </div>
+                    <div class="apple-con">
+                        <a href="#"><img src="images/apple.png"></a>
+                    </div>
+                    <div class="signup"><p>Already have an account? <a href="login.html">Login</a></p></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function registerUser() {
+            let newUser = document.getElementById("signUpUser").value.trim();
+            let newPass = document.getElementById("signUpPass").value.trim();
+            let signupUsernameError = document.getElementById("signupUsernameError");
+            let signupPasswordError = document.getElementById("signupPasswordError");
+            let isValid = true;
+
+            signupUsernameError.textContent = "";
+            signupPasswordError.textContent = "";
+
+
+        function toggleForm() {
+            // Since we are navigating between separate HTML files, this function is not needed here.
+            // The navigation is handled by the <a href="login.html"> tag.
+            // We can either remove this function or leave it as is; it won't be called in the current setup.
+        }
+    </script>
+    <style>
+        .error-message {
+            color: red;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+    </style>
+</body>
+</html>

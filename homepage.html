@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MKJE Shop</title>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="images/icong.png">
+    <style>
+        .cpbanner img {
+            width: 100%;
+            height: auto;
+            transition: opacity 1s ease-in-out;
+        }
+        #searchResults {
+            position: absolute;
+            top: 55px; /* Adjust based on your search bar's height */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%; /* Adjust as needed */
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            display: none;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .search-result-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .search-result-item:hover {
+            background-color: #eee;
+        }
+        .no-results {
+            padding: 10px;
+            text-align: center;
+            color: #777;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo"><img src="images/logo.png"></div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search" onkeyup="searchProducts()">
+                <button type="submit"><div class="search"><img src="images/search.webp"></div></button>
+                <div id="searchResults"></div>
+            </div>
+            <nav class="header-icons">
+                <div class="icons">
+                    <a href="basket.html"><img src="images/cart.png"></a>
+                </div>
+                <div class="notif">
+                    <a href="#"><img src="images/notif.png" alt="Notifications"></a>
+                    <div class="notif-dropdown"><hr>
+                        <ul>
+                            <p>No Notifications</p>
+                        </ul>
+                    </div>
+                </div>
+                <div class="acc">
+                    <a href="#"><img src="images/acc.webp"></a>
+                    <div class="dropdown">
+                        <ul>
+                            <li><a href="account.html">Profile</a></li>
+                            <li><a href="order_details.html">Orders</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="login.html">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Hamburger Button -->
+                    <div class="hamburger" onclick="toggleMenu()">
+                      ☰
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div class="mobile-menu" id="mobileMenu">
+                      <a href="homepage.html">Home</a>
+                      <a href="basket.html">Cart</a>
+                      <a href="received_items.html">Orders</a>
+                      <a href="#notif">Notifications</a>
+                      <a href="account.html">Account</a>
+                      <a href="login.html">Logout</a>
+                    </div>
+                     <div class="backdrop" id="backdrop" onclick="closeMenu()"></div>
+            </nav>
+        </div>
+    </header>
+    <div class="bg" style="height: 1250px;">
+        <div class="cpbanner">
+            <img id="slideshow" src="images/cel.jpg">
+        </div>
+        <div class="bannermilk">
+            <img src="images/milk.jpg">
+            <img src="images/almilk.jpg" style="margin-top: 10px;">
+        </div>
+        <div class="categories">
+            <div class="headtext"><h2>Categories</h2></div>
+            <div class="cate-con">
+                <div class="cate">
+                    <a href="shoes.html"><img src="images/Shoes.jpg"></a>
+                    <h4>Shoes</h4>
+                </div>
+                <div class="cate">
+                    <a href="watch.html"><img src="images/watch.jpg"></a>
+                    <h4>Watches</h4>
+                </div>
+                <div class="cate">
+                    <a href="Men_s Accessories.html"><img src="images/menbag.jpg"></a>
+                    <h4>Men's Accessories</h4>
+                </div>
+                <div class="cate">
+                    <a href="Home Appliances"><img src="images/blender.jpg"></a>
+                    <h4>Home Appliances</h4>
+                </div>
+                <div class="cate">
+                    <a href="Sports"><img src="images/gloves.jpg"></a>
+                    <h4>Sports</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/womanbag.jpg">
+                    <h4>Women's Accessories</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/mansanas.webp">
+                    <h4>Gadgets</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/lipstick.jpg">
+                    <h4>Beauty & Care</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/headset.jpg">
+                    <h4>Headphones</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/camera.jpg">
+                    <h4>Photography</h4>
+                </div>
+            </div>
+        </div>
+        <div class="top-con">
+            <div class="toptext"><h2>Top Products</h2></div>
+            <div class="products" id="topProductsContainer">
+
+                </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>CUSTOMER SERVICE</h4>
+                    <ul>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>ABOUT MKJE Shop</h4>
+                    <ul>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>PAYMENT</h4>
+                    <ul>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                    </ul>
+                </div>
+            </div><hr>
+            <p>&copy; 2025 MKJE Shop. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let images = ["images/cel.jpg", "images/juice.jpg", "images/yes.jpg"];
+        let index = 0;
+        let imgElement = document.getElementById("slideshow");
+    
+        function slideShow() {
+            index = (index + 1) % images.length;
+            imgElement.style.opacity = 0;
+            setTimeout(() => {
+                imgElement.src = images[index];
+                imgElement.style.opacity = 1;
+            }, 500);
+        }
+    
+        setInterval(slideShow, 3000);
+    
+        // --- Fake Product Data ---
+        const allProducts = [
+            {
+                id: "skateboard123",
+                name: "Skateboard",
+                price: "₱170.00",
+                image: "images/skateboard.png",
+                productDescription: [
+                    "Durable construction for long-lasting play.",
+                    "Realistic details and graphics.",
+                    "Smooth-rolling wheels for precise tricks.",
+                    "Perfect for collectors and enthusiasts.",
+                    "Includes tools and extra parts for customization.",
+                    "Great for stress relief and hand-eye coordination."
+                ]
+            },
+            {
+                id: "cupjoe456",
+                name: "Cup of Joe Album",
+                price: "₱300.00",
+                image: "images/coj.jpg",
+                productDescription: [
+                    "Experience Cup of Joe's powerful vocals and catchy melodies with their new album. Perfect for any music lover.",
+                    "Get instant access to Cup of Joe's newest tracks. Enjoy high-quality audio and exclusive bonus content.",
+                    "Support your favorite band! Purchase the Cup of Joe album and get ready to sing along."
+                ]
+            },
+            {
+                id: "iphone789",
+                name: "iPhone 15 Pro Max 1TB",
+                price: "₱50,000.00",
+                image: "images/mansanas.webp",
+                productDescription: [
+                    "Titanium Design: Lightweight and durable.",
+                    "Super Retina XDR Display: Vibrant and smooth.",
+                    "Pro Camera System: Professional-grade photos and videos.",
+                    "1TB Storage: Massive space for everything.",
+                    "USB-C: Faster charging and data transfer.",
+                    "Action Button: Customizable quick access."
+                ]
+            },
+            {
+                id: "poloshirt012",
+                name: "Polo Shirt",
+                price: "₱200.00",
+                image: "images/poloshirt.png",
+                productDescription: [
+                    "Soft, breathable cotton blend.",
+                    "Classic collar and button placket.",
+                    "Ribbed cuffs for a polished look.",
+                    "Tailored fit for comfort and style.",
+                    "Available in multiple colors.",
+                    "Perfect for casual or dressy occasions."
+                ]
+            },
+            {
+                id: "cargopant345",
+                name: "Cargo Trouser",
+                price: "₱500.00",
+                image: "images/cargo.jpg",
+                productDescription: [
+                    "Durable, wear-resistant fabric.",
+                    "Multiple spacious pockets.",
+                    "Side cargo pockets for extra storage.",
+                    "Relaxed fit for comfort.",
+                    "Adjustable waistband.",
+                    "Ideal for outdoor activities or casual wear.",
+                    "Cargo pants are known for their ruggedness."
+                ]
+            },
+            {
+                id: "jordan678",
+                name: "Jorban Shoes (Limited Edtion)",
+                price: "₱8,000,000,000.00",
+                image: "images/jorban.jpg",
+                productDescription: [
+                    "Air-Jor cushioning: Ultimate comfort.",
+                    "Hyper-Grip soles: Unrivaled traction.",
+                    "Quantum-Knit uppers: Lightweight breathability.",
+                    "Iconic design: Head-turning style.",
+                    "Performance-driven: Elevate your game.",
+                ]
+            },
+            {
+                id: "vios",
+                name: "Toyota Vios Light Gray",
+                price: "₱1,000,000.00",
+                image: "images/vios.webp",
+                productDescription: [
+                    "E-Glide hybrid system: Seamless power.",
+                    "Synapse-Drive: Intuitive navigation.",
+                    "Sky View panoramic roof: Urban vistas.",
+                    "Adaptive climate control: Personalized comfort.",
+                    "Aura-Sound audio: Immersive experience.",
+                    "City-smart design: Agile and efficient."
+                ]
+            },
+            {
+                id: "mouse",
+                name: "Logitech Mouse",
+                price: "₱900.00",
+                image: "images/mouse.png",
+                productDescription: [
+                    "Precise optical tracking.",
+                    "Comfortable, ergonomic design.",
+                    "Plug-and-play setup.",
+                    "Durable construction.",
+                    "Compatible with any Operating System."
+                ]
+            },
+            {
+                id: "keyboard",
+                name: "Earl's Mechanical Keyboard",
+                price: "₱845.00",
+                image: "images/key.jpg",
+                productDescription: [
+                    "Any mechanical switches.",
+                    "Customizable RGB lighting.",
+                    "Anti-ghosting and N-key rollover.",
+                    "Durable construction.",
+                    "Customizable macros.",
+                    "Detachable wrist rest."
+                ]
+            },
+            {
+                id: "mike",
+                name: "Mike Shoes",
+                price: "₱1,500",
+                image: "images/mikee.jpg",
+                productDescription: [
+                    "Comfortable CloudStride insole cushioning.",
+                    "Durable FlexWeave material construction.",
+                    "Stylish, unique designs.",
+                    "Versatile for everyday wear.",
+                    "AeroVent breathable mesh technology.",
+                ]
+                
+            },
+        ];
+    
+        function searchProducts() {
+            const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+            const searchResultsContainer = document.getElementById("searchResults");
+            searchResultsContainer.innerHTML = "";
+    
+            if (searchTerm.trim() === "") {
+                searchResultsContainer.style.display = "none";
+                return;
+            }
+    
+            const results = allProducts.filter(product =>
+                product.name.toLowerCase().includes(searchTerm)
+            );
+    
+            if (results.length > 0) {
+                results.forEach(product => {
+                    const resultItem = document.createElement("div");
+                    resultItem.classList.add("search-result-item");
+                    resultItem.textContent = `${product.name} (${product.price})`;
+    
+                    resultItem.addEventListener("click", () => {
+                        document.getElementById("searchInput").value = product.name;
+                        searchResultsContainer.style.display = "none";
+    
+                        // Debugging console logs added here.
+                        console.log("Product before URL:", product);
+                        console.log("Product Description:", product.productDescription);
+    
+                        window.location.href = `product_info.html?id=${product.id}&name=${encodeURIComponent(product.name)}&price=${encodeURIComponent(product.price.replace('₱', ''))}&img=${encodeURIComponent(product.image)}&description=${encodeURIComponent(JSON.stringify(product.productDescription || []))}`;
+                    });
+                    searchResultsContainer.appendChild(resultItem);
+                });
+                searchResultsContainer.style.display = "block";
+            } else {
+                const noResults = document.createElement("div");
+                noResults.classList.add("no-results");
+                noResults.textContent = "No products found.";
+                searchResultsContainer.appendChild(noResults);
+                searchResultsContainer.style.display = "block";
+            }
+        }
+    
+        // --- Simulate Dynamic Loading of Top Products ---
+        const topProductsContainer = document.getElementById("topProductsContainer");
+        const topProductsToDisplay = allProducts.slice(0, 10);
+    
+        topProductsToDisplay.forEach(product => {
+            const productCard = document.createElement("div");
+            productCard.classList.add("product-card");
+            productCard.style.cursor = "pointer";
+            productCard.addEventListener("click", () => {
+    
+                // Debugging console logs added here.
+                console.log("Product before URL:", product);
+                console.log("Product Description:", product.productDescription);
+    
+                window.location.href = `product_info.html?id=${product.id}&name=${encodeURIComponent(product.name)}&price=${encodeURIComponent(product.price.replace('₱', ''))}&img=${encodeURIComponent(product.image)}&description=${encodeURIComponent(JSON.stringify(product.productDescription || []))}`;
+            });
+            productCard.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <p class="product-name">${product.name}</p>
+                <p class="price">${product.price}</p>
+                <p class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i> (Some sold)
+                </p>
+            `;
+            topProductsContainer.appendChild(productCard);
+        });
+    
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const backdrop = document.getElementById('backdrop');
+    
+            menu.classList.toggle('show');
+            hamburger.classList.toggle('hide');
+            backdrop.style.display = menu.classList.contains('show') ? 'block' : 'none';
+        }
+    
+        function closeMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const backdrop = document.getElementById('backdrop');
+    
+            menu.classList.remove('show');
+            hamburger.classList.remove('hide');
+            backdrop.style.display = 'none';
+        }
+    </script>
+    </body>
+    </html>

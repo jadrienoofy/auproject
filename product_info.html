@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Info | MKJE Shop</title>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="icon" href="images/icong.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .product-details {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        
+        .product-details img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .product-details h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #B2A4D4;
+            text-align: left;
+        }
+
+        .product-details p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .rating-section {
+            display: flex;
+            align-items: left;
+            margin-bottom: 10px;
+            justify-content: left;
+        }
+
+        .rating-section .fa {
+            color: gold;
+            margin-right: 5px;
+        }
+
+        .description-section {
+            margin-bottom: 20px;
+            text-align: left;
+            font-style: italic;
+            color: #777;
+        }
+
+        .quantity-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .quantity-section label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .quantity-section input[type="number"] {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .actions-section {
+            display: flex;
+            gap: 15px;
+        }
+
+        .actions-section button {
+            background-color: #B2A4D4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .actions-section button:hover {
+            background-color: #9181b3;
+        }
+
+        #cart-feedback {
+            margin-top: 10px;
+            color: green;
+            font-weight: bold;
+            display: none;
+        }
+        .quantity-section, .actions-section {
+            align-items: center;
+            justify-content: center;
+        }
+        @media (max-width: 768px){
+            .main-header {
+                margin-top: -20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="MKJE Shop Logo">
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products...">
+                <button type="submit">
+                    <div class="search">
+                        <img src="images/search.webp" alt="Search Icon">
+                    </div>
+                </button>
+            </div>
+            <nav class="header-icons">
+                <div class="icons">
+                    <a href="basket.html"><img src="images/cart.png" alt="Cart"></a>
+                </div>
+                <div class="notif">
+                    <a href="#"><img src="images/notif.png" alt="Notifications"></a>
+                    <div class="notif-dropdown"><hr>
+                        <ul>
+                            <p>No Notifications</p>
+                        </ul>
+                    </div>
+                </div>
+                <div class="acc">
+                    <a href="#"><img src="images/acc.webp" alt="Account"></a>
+                    <div class="dropdown">
+                        <ul>
+                            <li><a href="account.html">Profile</a></li>
+                            <li><a href="received_items.html">Orders</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="login.html">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Hamburger Button -->
+                    <div class="hamburger" onclick="toggleMenu()">
+                      ☰
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div class="mobile-menu" id="mobileMenu">
+                      <a href="homepage.html">Home</a>
+                      <a href="basket.html">Cart</a>
+                      <a href="received_items.html">Orders</a>
+                      <a href="#notif">Notifications</a>
+                      <a href="account.html">Account</a>
+                      <a href="login.html">Logout</a>
+                    </div>
+                     <div class="backdrop" id="backdrop" onclick="closeMenu()"></div>
+            </nav>
+        </div>
+    </header>
+    <div class="product-details">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+    <!---->
+    <a href="homepage.html" style="
+        background-color: #B2A4D4;
+        color: white;
+        text-decoration: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-weight: bold;
+    ">X</a>
+    <h4 style="margin: 0; text-align: center; flex-grow: 1; margin-right: 30px; font-size: 18px;">Product Details</h4>
+    </div>
+
+
+    <img id="productImage" src="" alt="Product">
+    <h2 id="productName"></h2>
+    <div class="rating-section">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star-half-o"></i>
+    </div>
+    <p id="productPrice"></p>
+    <p id="productDescription" class="description-section product-desc">A brief description of the awesome product.</p>
+
+    <div class="quantity-section">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" value="1" min="1">
+    </div>
+
+    <div class="actions-section">
+        <button onclick="addToCart()">Add to Cart</button>
+        <button id="buy-now-button">Buy Now</button>
+    </div>
+    <div id="cart-feedback">Added to cart!</div>
+</div>
+
+
+    <footer style="background-color: #B2A4D4; height: 350px; margin-top: 50px;">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>CUSTOMER SERVICE</h4>
+                    <ul>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>ABOUT MKJE Shop</h4>
+                    <ul>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>PAYMENT</h4>
+                    <ul>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                    </ul>
+                </div>
+            </div><hr>
+            <p>&copy; 2025 MKJE Shop. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const productName = urlParams.get("name");
+        const productPrice = urlParams.get("price");
+        const productImageSrc = urlParams.get("img");
+        const productId = urlParams.get("id");
+        const productDescription = JSON.parse(decodeURIComponent(urlParams.get("description"))) || ["Description not available."]; // Assuming you're also passing the ID in the URL
+
+        document.getElementById("productName").innerText = productName;
+        document.getElementById("productPrice").innerText = "₱" + productPrice;
+        document.getElementById("productImage").src = productImageSrc;
+        document.getElementById("productDescription").innerHTML = "Description: <br>" + productDescription.map(desc => `<li>${desc}</li>`).join('');
+
+        const quantityInput = document.getElementById("quantity");
+        const buyNowButton = document.getElementById('buy-now-button');
+        const cartFeedback = document.getElementById('cart-feedback');
+
+        function addToCart() {
+            const quantity = parseInt(quantityInput.value);
+            if (isNaN(quantity) || quantity < 1) {
+                alert("Please select a valid quantity.");
+                return;
+            }
+
+            let product = {
+                id: productId, // Include the ID
+                name: productName,
+                price: productPrice,
+                img: productImageSrc,
+                quantity: quantity
+            };
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Visual feedback
+            cartFeedback.style.display = 'block';
+            setTimeout(() => {
+                cartFeedback.style.display = 'none';
+            }, 2000);
+
+            // Optionally, don't redirect immediately
+            // window.location.href = "basket.html";
+        }
+
+        if (buyNowButton) {
+            buyNowButton.addEventListener('click', () => {
+                const img = document.getElementById('productImage').src;
+                const name = document.getElementById('productName').textContent;
+                const price = document.getElementById('productPrice').textContent.replace('₱', '');
+                const quantity = parseInt(quantityInput.value);
+
+                const buyNowItem = {
+                    id: productId, // Ensure you have 'id' in your URL parameters from homepage
+                    name: name,
+                    price: parseFloat(price).toFixed(2), // Clean up price
+                    img: img,
+                    quantity: quantity
+                };
+
+                localStorage.setItem('buyNowProduct', JSON.stringify(buyNowItem));
+                window.location.href = 'order_details.html';
+            });
+        }
+
+        // Basic quantity input validation on change
+        quantityInput.addEventListener('change', () => {
+            const quantity = parseInt(quantityInput.value);
+            if (isNaN(quantity) || quantity < 1) {
+                quantityInput.value = 1; // Reset to minimum if invalid
+            }
+        });
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const backdrop = document.getElementById('backdrop');
+    
+            menu.classList.toggle('show');
+            hamburger.classList.toggle('hide');
+            backdrop.style.display = menu.classList.contains('show') ? 'block' : 'none';
+        }
+    
+        function closeMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const backdrop = document.getElementById('backdrop');
+    
+            menu.classList.remove('show');
+            hamburger.classList.remove('hide');
+            backdrop.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

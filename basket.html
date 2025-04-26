@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | MKJE Shop</title>
+    <link rel="icon" href="images/icong.png">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        /* Existing styles */
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item.selected {
+            background-color: #f0f8ff; /* Light Alice Blue to indicate selection */
+        }
+
+        .cart-item-details {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-item img {
+            max-width: 80px;
+            height: auto;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        .quantity-controls button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .quantity-controls span {
+            font-weight: bold;
+            min-width: 20px; /* Ensure some space for the number */
+            text-align: center;
+            display: inline-block;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-item-actions button {
+            padding: 8px 12px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .select-item {
+            margin-right: 10px;
+        }
+
+        .selected-items-section {
+            margin: 70px auto;
+            padding: 15px;
+            width: 100%;
+            max-width: 800px; /* Or any fixed max width you prefer */
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+}
+
+
+
+        .selected-items-section h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #B2A4D4;
+        }
+
+        .selected-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .selected-item img {
+            max-width: 50px;
+            height: auto;
+            margin-right: 10px;
+            border-radius: 3px;
+        }
+
+        .selected-item-info {
+            flex-grow: 1;
+        }
+
+        #checkout-button, #continue-shopping-button {
+            background-color: #B2A4D4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            justify-content: right;
+            font-size: 1em;
+            margin-top: 15px;
+        }
+        #continue-shopping-button {
+
+        }
+
+        #checkout-button:hover, #continue-shopping-button:hover {
+            background-color: #9181b3;
+        }
+
+        .cart-total-section {
+            margin-top: 20px;
+            text-align: right;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        
+
+        .cart-actions-bottom {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+        .container {
+        width: 100%;
+    }
+        .main-header {
+        width: 100%;
+        z-index: 1;
+        height: 70px;
+        position: fixed;
+        margin-top: -20px;
+    }
+    .selected-items-section {
+        border-radius: 0px;
+    }
+    .notif-dropdown {
+        display: none;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="MKJE Shop Logo">
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products...">
+                <button type="submit">
+                    <div class="search">
+                        <img src="images/search.webp" alt="Search Icon">
+                    </div>
+                </button>
+            </div>
+            <nav class="header-icons">
+                <div class="icons">
+                    <a href="basket.html"><img src="images/cart.png" alt="Cart"></a>
+                </div>
+                <div class="notif">
+                    <a href="#"><img src="images/notif.png" alt="Notifications"></a>
+                    <div class="notif-dropdown"><hr>
+                        <ul>
+                            <p>No Notifications</p>
+                        </ul>
+                    </div>
+                </div>
+                <div class="acc">
+                    <a href="#"><img src="images/acc.webp" alt="Account"></a>
+                    <div class="dropdown">
+                        <ul>
+                            <li><a href="account.html">Profile</a></li>
+                            <li><a href="received_items.html">Orders</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="index.html">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Hamburger Button -->
+                    <div class="hamburger" onclick="toggleMenu()">
+                      ☰
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div class="mobile-menu" id="mobileMenu">
+                      <a href="homepage.html">Home</a>
+                      <a href="basket.html">Cart</a>
+                      <a href="received_items.html">Orders</a>
+                      <a href="#notif">Notifications</a>
+                      <a href="account.html">Account</a>
+                      <a href="login.html">Logout</a>
+                    </div>
+                     <div class="backdrop" id="backdrop" onclick="closeMenu()"></div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="cart-items">
+        <p id="empty-cart-message">No items in cart.</p>
+    </div>
+
+    
+
+    <div class="selected-items-section">
+        <h3>Selected Items</h3>
+        <div id="selected-items-list">
+            <p>No items selected.</p>
+        </div>
+        <hr><div class="cart-total-section">
+        Total: <span id="total-price"></span>
+    </div>
+        <div class="cart-actions-bottom" style="justify-content: right;">
+        <button id="continue-shopping-button" style="margin-right: 10px;" onclick="window.location.href='homepage.html'">Back to Homepage</button>
+        <button id="checkout-button" onclick="goToOrderDetails()">Proceed to Checkout</button>
+    </div>
+    </div>
+
+
+    <footer class="footer" style="margin-top: 238.5px;">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>CUSTOMER SERVICE</h4>
+                    <ul>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>ABOUT MKJE Shop</h4>
+                    <ul>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>PAYMENT</h4>
+                    <ul>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                    </ul>
+                </div>
+            </div><hr>
+            <p>&copy; 2025 MKJE Shop. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItemsDiv = document.querySelector('.cart-items');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const totalPriceDisplay = document.getElementById('total-price');
+        const selectedItemsListDiv = document.getElementById('selected-items-list');
+
+        // Load selected items from localStorage
+        let selectedItemIndices = JSON.parse(localStorage.getItem('selectedCartIndices')) || [];
+        let selectedItems = cartItems.filter((item, index) => selectedItemIndices.includes(index));
+
+        function updateCartDisplay() {
+            cartItemsDiv.innerHTML = '';
+            let totalPrice = 0;
+
+            if (cartItems.length === 0) {
+                emptyCartMessage.style.display = 'block';
+                totalPriceDisplay.textContent = '₱0.00';
+                selectedItemIndices = [];
+                selectedItems = [];
+                localStorage.removeItem('selectedCartIndices');
+                updateSelectedItemsDisplay();
+                return;
+            } else {
+                emptyCartMessage.style.display = 'none';
+            }
+
+            cartItems.forEach((item, index) => {
+                const cartItemDiv = document.createElement('div');
+                cartItemDiv.classList.add('cart-item');
+                if (selectedItemIndices.includes(index)) {
+                    cartItemDiv.classList.add('selected');
+                }
+
+                const selectCheckbox = document.createElement('input');
+                selectCheckbox.type = 'checkbox';
+                selectCheckbox.classList.add('select-item');
+                selectCheckbox.dataset.index = index;
+                selectCheckbox.checked = selectedItemIndices.includes(index); // Set initial checked state
+                selectCheckbox.addEventListener('change', updateSelectedItems);
+                selectCheckbox.setAttribute('aria-label', `Select ${item.name} for checkout`);
+
+                const cartItemDetailsDiv = document.createElement('div');
+                cartItemDetailsDiv.classList.add('cart-item-details');
+
+                const img = document.createElement('img');
+                img.src = item.img;
+                img.alt = item.name;
+
+                const cartItemInfoDiv = document.createElement('div');
+                cartItemInfoDiv.classList.add('cart-item-info');
+
+                const name = document.createElement('p');
+                name.textContent = item.name;
+
+                const price = document.createElement('p');
+                price.textContent = `₱${item.price}`;
+                price.id = `item-price-${index}`; // Unique ID for real-time update
+
+                cartItemInfoDiv.appendChild(name);
+                cartItemInfoDiv.appendChild(price);
+                cartItemDetailsDiv.appendChild(img);
+                cartItemDetailsDiv.appendChild(cartItemInfoDiv);
+
+                const quantityControlsDiv = document.createElement('div');
+                quantityControlsDiv.classList.add('quantity-controls');
+
+                const decreaseButton = document.createElement('button');
+                decreaseButton.textContent = '-';
+                decreaseButton.addEventListener('click', () => {
+                    decreaseQuantity(index);
+                });
+                decreaseButton.setAttribute('aria-label', `Decrease quantity of ${item.name}`);
+
+                const quantitySpan = document.createElement('span');
+                quantitySpan.textContent = item.quantity || 1;
+                quantitySpan.id = `item-quantity-${index}`; // Unique ID for real-time update
+
+                const increaseButton = document.createElement('button');
+                increaseButton.textContent = '+';
+                increaseButton.addEventListener('click', () => {
+                    increaseQuantity(index);
+                });
+                increaseButton.setAttribute('aria-label', `Increase quantity of ${item.name}`);
+
+                quantityControlsDiv.appendChild(decreaseButton);
+                quantityControlsDiv.appendChild(quantitySpan);
+                quantityControlsDiv.appendChild(increaseButton);
+
+                const cartItemActionsDiv = document.createElement('div');
+                cartItemActionsDiv.classList.add('cart-item-actions');
+
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Remove';
+                removeButton.addEventListener('click', () => {
+                    removeItem(index);
+                });
+                removeButton.setAttribute('aria-label', `Remove ${item.name} from cart`);
+
+                cartItemActionsDiv.appendChild(removeButton);
+
+                cartItemDiv.appendChild(selectCheckbox);
+                cartItemDiv.appendChild(cartItemDetailsDiv);
+                cartItemDiv.appendChild(quantityControlsDiv);
+                cartItemDiv.appendChild(cartItemActionsDiv);
+                cartItemsDiv.appendChild(cartItemDiv);
+
+                totalPrice += parseFloat(item.price) * (item.quantity || 1);
+            });
+
+            totalPriceDisplay.textContent = `₱${totalPrice.toFixed(2)}`;
+            updateSelectedItemsDisplay();
+        }
+
+        function decreaseQuantity(index) {
+            if (cartItems[index].quantity > 1) {
+                cartItems[index].quantity--;
+                localStorage.setItem('cart', JSON.stringify(cartItems));
+                updateCartItemDisplay(index); // Update single item display
+                updateTotalPrice();
+            } else if (confirm('Remove item from cart?')) {
+                removeItem(index);
+            }
+        }
+
+        function increaseQuantity(index) {
+            cartItems[index].quantity = (cartItems[index].quantity || 1) + 1;
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+            updateCartItemDisplay(index); // Update single item display
+            updateTotalPrice();
+        }
+
+        function removeItem(index) {
+            // Update selected items if the removed item was selected
+            if (selectedItemIndices.includes(index)) {
+                selectedItemIndices = selectedItemIndices.filter(i => i !== index);
+                localStorage.setItem('selectedCartIndices', JSON.stringify(selectedItemIndices));
+                selectedItems = cartItems.filter((item, idx) => selectedItemIndices.includes(idx));
+            }
+            cartItems.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+            updateCartDisplay();
+        }
+
+        function updateSelectedItems(event) {
+            const checkbox = event.target;
+            const index = parseInt(checkbox.dataset.index);
+            const cartItemDiv = checkbox.closest('.cart-item');
+
+            if (checkbox.checked) {
+                if (!selectedItemIndices.includes(index)) {
+                    selectedItemIndices.push(index);
+                    cartItemDiv.classList.add('selected');
+                }
+            } else {
+                selectedItemIndices = selectedItemIndices.filter(i => i !== index);
+                cartItemDiv.classList.remove('selected');
+            }
+
+            localStorage.setItem('selectedCartIndices', JSON.stringify(selectedItemIndices));
+            selectedItems = cartItems.filter((item, idx) => selectedItemIndices.includes(idx));
+            updateSelectedItemsDisplay();
+        }
+
+        function updateCartItemDisplay(index) {
+            const item = cartItems[index];
+            document.getElementById(`item-quantity-${index}`).textContent = item.quantity;
+            document.getElementById(`item-price-${index}`).textContent = `₱${item.price}`; // Price remains the same per item
+        }
+
+        function updateTotalPrice() {
+            let totalPrice = 0;
+            cartItems.forEach(item => {
+                totalPrice += parseFloat(item.price) * (item.quantity || 1);
+            });
+            totalPriceDisplay.textContent = `₱${totalPrice.toFixed(2)}`;
+        }
+
+        function updateSelectedItemsDisplay() {
+    selectedItemsListDiv.innerHTML = '';
+    let totalPrice = 0;
+
+    if (selectedItems.length === 0) {
+        selectedItemsListDiv.innerHTML = '<p>No items selected.</p>';
+        totalPriceDisplay.textContent = '₱0.00';
+        return;
+    }
+
+    selectedItems.forEach(item => {
+        const selectedItemDiv = document.createElement('div');
+        selectedItemDiv.classList.add('selected-item');
+
+        const img = document.createElement('img');
+        img.src = item.img;
+        img.alt = item.name;
+
+        const infoDiv = document.createElement('div');
+        infoDiv.classList.add('selected-item-info');
+
+        const itemTotal = parseFloat(item.price) * (item.quantity || 1);
+        totalPrice += itemTotal;
+
+        infoDiv.innerHTML = `<p>${item.name} (x${item.quantity || 1}) - ₱${itemTotal.toFixed(2)}</p>`;
+
+        selectedItemDiv.appendChild(img);
+        selectedItemDiv.appendChild(infoDiv);
+        selectedItemsListDiv.appendChild(selectedItemDiv);
+    });
+
+    totalPriceDisplay.textContent = `₱${totalPrice.toFixed(2)}`;
+}
+
+
+        function goToOrderDetails() {
+            if (selectedItems.length === 0) {
+                alert('Please select at least one item to proceed to checkout.');
+                return;
+            }
+            localStorage.setItem('selectedItemsForCheckout', JSON.stringify(selectedItems));
+
+            // Remove selected items from the cart
+            let updatedCart = cartItems.filter((item, index) => !selectedItemIndices.includes(index));
+            localStorage.setItem('cart', JSON.stringify(updatedCart));
+            localStorage.removeItem('selectedCartIndices'); // Clear selected indices
+            cartItems = updatedCart; // Update the cartItems array
+            selectedItemIndices = []; // Clear selected indices array
+            selectedItems = []; // Clear selected items array
+            updateCartDisplay(); // Re-render the cart
+
+            window.location.href = "order_details.html?checkout=selected";
+        }
+
+        // Initialize cart display and selected items on page load
+        updateCartDisplay();
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const backdrop = document.getElementById('backdrop');
+    
+            menu.classList.toggle('show');
+            hamburger.classList.toggle('hide');
+            backdrop.style.display = menu.classList.contains('show') ? 'block' : 'none';
+        }
+    
+        function closeMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const backdrop = document.getElementById('backdrop');
+    
+            menu.classList.remove('show');
+            hamburger.classList.remove('hide');
+            backdrop.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account | MKJE Shop</title>
+    <link rel="icon" href="images/icong.png">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+  .account-container {
+    width: 80%;
+    margin: 50px auto 10px auto; /* Push it down to avoid clashing with header */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+  
+}
+
+        .account-container h1 {
+            color: #004ea8;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .account-info {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .account-info label {
+            font-weight: bold;
+        }
+
+        .account-actions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .account-actions ul li {
+            margin-bottom: 10px;
+        }
+
+        .account-actions ul li a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .account-actions ul li a:hover {
+            background-color: #f0f0f0;
+        }
+
+        #edit-button {
+            background-color: #B2A4D4; /* Assuming this is your header color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 15px;
+        }
+
+        #edit-button:hover {
+            background-color: #9181b3; /* Assuming this is your header hover color */
+        }
+
+        .edit-row {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .edit-row label {
+            font-weight: bold;
+        }
+
+        .edit-row input[type="text"],
+        .edit-row input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .edit-controls {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .edit-controls button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-left: 10px;
+        }
+
+        .done-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+
+        .done-button:hover {
+            background-color: #0056b3;
+        }
+
+        .cancel-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+        }
+
+        .cancel-button:hover {
+            background-color: #d32f2f;
+        }
+
+        .info-value {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+        button {
+            background-color: #B2A4D4;
+            border: none;
+            border-radius: 8px;
+            padding-top: 5px;
+            padding-right: 6px;
+        }
+        button img {
+            height: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .main-header {
+                margin-top: -50px;
+            }
+            .account-container {
+                width: 100%;
+            }
+            .account-container button {
+                z-index: 99;
+            }
+            .home-button {
+                display: inline-block;
+                background-color: #B2A4D4;
+                padding: 5px 6px;
+                border-radius: 8px;
+            }
+
+            .home-button img {
+                height: 30px;
+                z-index: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="MKJE Shop Logo">
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products...">
+                <button type="submit">
+                    <div class="search">
+                        <img src="images/search.webp" alt="Search Icon">
+                    </div>
+                </button>
+            </div>
+            <nav class="header-icons">
+                <div class="icons">
+                    <a href="basket.html"><img src="images/cart.png" alt="Cart"></a>
+                </div>
+                <div class="notif">
+                    <a href="#"><img src="images/notif.png" alt="Notifications"></a>
+                    <div class="notif-dropdown"><hr>
+                        <ul>
+                            <p>No Notifications</p>
+                        </ul>
+                    </div>
+                </div>
+                <div class="acc">
+                    <a href="#"><img src="images/acc.webp" alt="Account"></a>
+                    <div class="dropdown">
+                        <ul>
+                            <li><a href="account.html">Profile</a></li>
+                            <li><a href="received_items.html">Orders</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="index.html">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Hamburger Button -->
+                    <div class="hamburger" onclick="toggleMenu()">
+                      ☰
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div class="mobile-menu" id="mobileMenu">
+                      <a href="homepage.html">Home</a>
+                      <a href="basket.html">Cart</a>
+                      <a href="received_items.html">Orders</a>
+                      <a href="#notif">Notifications</a>
+                      <a href="account.html">Account</a>
+                      <a href="login.html">Logout</a>
+                    </div>
+                     <div class="backdrop" id="backdrop" onclick="closeMenu()"></div>
+            </nav>
+        </div>
+    </header>
+
+
+
+    <div class="account-container"><br>
+        <button>
+            <a href="homepage.html" class="home-button">
+                <img src="images/home.png">
+            </a>
+        </button>
+        <h1>Account Information</h1>
+        <div class="account-info">
+            <label for="name">Name:</label>
+            <span id="name" class="info-value">John Doe</span>
+
+            <label for="email">Email:</label>
+            <span id="email" class="info-value">john.doe@example.com</span>
+
+            <label for="phone">Phone:</label>
+            <span id="phone" class="info-value">+1 555-123-4567</span>
+
+            <label for="address">Address:</label>
+            <span id="address" class="info-value">123 Main St, Anytown, USA</span>
+        </div>
+
+        <button id="edit-button">Edit Account Information</button>
+
+        <div id="edit-form" style="display: none;">
+            <h2>Edit Informations</h2>
+            <div id="edit-fields">
+            </div>
+            <div class="edit-controls">
+                <button id="done-edit" class="done-button">Done</button>
+                <button id="cancel-edit" class="cancel-button">Cancel</button>
+            </div>
+        </div>
+
+        <h2>Account Actions</h2>
+        <div class="account-actions">
+            <ul>
+                <li><a href="received_items.html">View Order History</a></li>
+                <li><a href="#">Account Settings</a></li>
+                <li><a href="basket.html">Wishlist</a></li>
+                <li><a href="#">Payment Methods</a></li>
+                <li><a href="#">Shipping Addresses</a></li>
+                <li><a href="login.html">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer style="background-color: #B2A4D4; height: 350px; margin-top: 50px;">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>CUSTOMER SERVICE</h4>
+                    <ul>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>ABOUT MKJE Shop</h4>
+                    <ul>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>PAYMENT</h4>
+                    <ul>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                    </ul>
+                </div>
+            </div><hr>
+            <p>&copy; <span id="currentYear"></span> MKJE Shop. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const accountInfoDiv = document.querySelector('.account-info');
+        const editButton = document.getElementById('edit-button');
+        const editFormDiv = document.getElementById('edit-form');
+        const editFieldsDiv = document.getElementById('edit-fields');
+        const doneEditButton = document.getElementById('done-edit');
+        const cancelEditButton = document.getElementById('cancel-edit');
+        const infoSpans = document.querySelectorAll('.account-info .info-value');
+        let isEditing = false;
+    
+        function loadAccountInfo() {
+            const userData = {
+                name: localStorage.getItem('name') || "John Doe",
+                email: localStorage.getItem('email') || "john.doe@example.com",
+                phone: localStorage.getItem('phone') || "+1 555-123-4567",
+                address: localStorage.getItem('address') || "123 Main St, Anytown, USA"
+            };
+    
+            infoSpans.forEach(span => {
+                const key = span.id;
+                if (userData.hasOwnProperty(key)) {
+                    span.textContent = userData[key];
+                }
+            });
+        }
+    
+        editButton.addEventListener('click', function () {
+            isEditing = !isEditing;
+            editFormDiv.style.display = isEditing ? 'block' : 'none';
+        });
+    
+        // ✅ Make hamburger functions GLOBAL
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const backdrop = document.getElementById('backdrop');
+    
+            menu.classList.toggle('show');
+            hamburger.classList.toggle('hide');
+            backdrop.style.display = menu.classList.contains('show') ? 'block' : 'none';
+        }
+    
+        function closeMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const backdrop = document.getElementById('backdrop');
+    
+            menu.classList.remove('show');
+            hamburger.classList.remove('hide');
+            backdrop.style.display = 'none';
+        }
+    
+        // Call once to initialize
+        loadAccountInfo();
+    </script>
+    

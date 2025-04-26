@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoes | MKJE Shop</title>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="images/icong.png">
+    <style>
+        #searchResults {
+            position: absolute;
+            top: 55px; /* Adjust based on your search bar's height */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%; /* Adjust as needed */
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            display: none;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .search-result-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .search-result-item:hover {
+            background-color: #eee;
+        }
+        .no-results {
+            padding: 10px;
+            text-align: center;
+            color: #777;
+        }
+
+        @media  (max-width: 768px) {
+            .hide {
+                display: none;
+            }
+            .sheesh h2  {
+                margin-right: 50px;
+            }
+            footer {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo"><img src="images/logo.png"></div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search" onkeyup="searchProducts()">
+                <button type="submit"><div class="search"><img src="images/search.webp"></div></button>
+                <div id="searchResults"></div>
+            </div>
+            <nav class="header-icons">
+                <div class="icons">
+                    <a href="basket.html"><img src="images/cart.png"></a>
+                </div>
+                <div class="notif">
+                    <a href="#"><img src="images/notif.png" alt="Notifications"></a>
+                    <div class="notif-dropdown"><hr>
+                        <ul>
+                            <p>No Notifications</p>
+                        </ul>
+                    </div>
+                </div>
+                <div class="acc">
+                    <a href="#"><img src="images/acc.webp"></a>
+                    <div class="dropdown">
+                        <ul>
+                            <li><a href="account.html">Profile</a></li>
+                            <li><a href="order_details.html">Orders</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="login.html">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Hamburger Button -->
+                    <div class="hamburger" onclick="toggleMenu()">
+                      ☰
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div class="mobile-menu" id="mobileMenu">
+                      <a href="homepage.html">Home</a>
+                      <a href="basket.html">Cart</a>
+                      <a href="received_items.html">Orders</a>
+                      <a href="#notif">Notifications</a>
+                      <a href="account.html">Account</a>
+                      <a href="login.html">Logout</a>
+                    </div>
+                     <div class="backdrop" id="backdrop" onclick="closeMenu()"></div>
+            </nav>
+        </div>
+    </header>
+    <div class="bg" style="height: 1400px;">
+        <div class="categories" style="height: 1350px;">
+            <div class="headtext" style="text-align: center;">
+                <div class="sheesh" style="text-align: left; margin-top: 20px;">
+                <a href="homepage.html" class="hide" style="
+                    background-color: #B2A4D4;
+                    color: white;
+                    text-decoration: none;
+                    padding: 6px 12px;
+                    margin-left: 20px;
+                    text-align: left;
+                    border-radius: 4px;
+                    font-weight: bold;
+        
+                        ">X</a>
+            </div><h2>Shoes</h2></div>
+            <div class="cate-con" style="height: auto;">
+                <div class="cate">
+                    <img src="images/Shoes.jpg">
+                    <h4>Air Jordan High Cut</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/running.jpg">
+                    <h4>Running Shoes</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/pamporma.jpg">
+                    <h4>Pampormang Sapatos</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/download.jpg">
+                    <h4>Stylish Shoes</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/dame.jpg">
+                    <h4>Adidas Dame 7</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/jorban.jpg">
+                    <h4>Jorban Shoes (Limited Edition)</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/conv.webp">
+                    <h4>Converge Shoes</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/mikee.jpg">
+                    <h4>Mike Shoes</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/jordie.webp">
+                    <h4>Jordie Shoes</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/ikea.jpg">
+                    <h4>Adidas x Ikea Boost</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/Shoes.jpg">
+                    <h4>Air Jordan High Cut</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/running.jpg">
+                    <h4>Running Shoes</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/pamporma.jpg">
+                    <h4>Pampormang Sapatos</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/download.jpg">
+                    <h4>Stylish Shoes</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/dame.jpg">
+                    <h4>Adidas Dame 7</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/jorban.jpg">
+                    <h4>Jorban Shoes (Limited Edition)</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/conv.webp">
+                    <h4>Converge Shoes</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/mikee.jpg">
+                    <h4>Mike Shoes</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/jordie.webp">
+                    <h4>Jordie Shoes</h4>
+                </div>
+                <div class="cate">
+                    <img src="images/ikea.jpg">
+                    <h4>Adidas x Ikea Boost</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer" style="height: 300px; margin-top: 80px;">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>CUSTOMER SERVICE</h4>
+                    <ul>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>ABOUT MKJE Shop</h4>
+                    <ul>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>PAYMENT</h4>
+                    <ul>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                    </ul>
+                </div>
+            </div><hr>
+            <p>&copy; 2025 MKJE Shop. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const backdrop = document.getElementById('backdrop');
+    
+            menu.classList.toggle('show');
+            hamburger.classList.toggle('hide');
+            backdrop.style.display = menu.classList.contains('show') ? 'block' : 'none';
+        }
+    
+        function closeMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const backdrop = document.getElementById('backdrop');
+    
+            menu.classList.remove('show');
+            hamburger.classList.remove('hide');
+            backdrop.style.display = 'none';
+        }
+    </script>
+
+    </body>
+    </html>

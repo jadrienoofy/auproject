@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details | MKJE Shop</title>
+    <link rel="icon" type="text/css" href="images/icong.png">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        /* Existing styles */
+        .order-details-container {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 50px auto 10px auto;
+            max-width: 800px;
+        }
+
+        .order-details-container h1 {
+            color: #B2A4D4;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .product-summary {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .product-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .product-item img {
+            max-width: 80px;
+            height: auto;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+
+        .product-info {
+            flex-grow: 1;
+        }
+
+        .product-info p {
+            margin: 5px 0;
+        }
+
+        .quantity-display {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .shipping-payment {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .shipping-payment h3 {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .payment-methods label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px; /* Add some padding for better click area */
+            border-radius: 5px;
+        }
+
+        .payment-methods label.selected-payment {
+            background-color: #e0f7fa; /* Light cyan to highlight */
+            border: 1px solid #80deea;
+        }
+
+        .payment-methods input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .order-summary {
+            padding-top: 15px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .summary-item strong {
+            color: #333;
+        }
+
+        .total {
+            padding-top: 10px;
+            border-top: 2px solid #eee;
+            font-size: 1.2em;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .back-to-basket-button, .place-order-button {
+            background-color: #B2A4D4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            justify-content: right;
+            font-size: 1em;
+            margin-left: 10px;
+            margin-top: 15px;
+        }
+
+        .back-to-basket-button:hover, .place-order-button:hover {
+            background-color: #9181b3;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .input-group input[type="text"],
+        .input-group input[type="tel"],
+        .input-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .input-group textarea {
+            resize: vertical;
+        }
+
+        
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="MKJE Shop Logo">
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products...">
+                <button type="submit">
+                    <div class="search">
+                        <img src="images/search.webp" alt="Search Icon">
+                    </div>
+                </button>
+            </div>
+            <nav class="header-icons">
+                <div class="icons">
+                    <a href="basket.html"><img src="images/cart.png" alt="Cart"></a>
+                </div>
+                <div class="notif">
+                    <a href="#"><img src="images/notif.png" alt="Notifications"></a>
+                    <div class="notif-dropdown"><hr>
+                        <ul>
+                            <p>No Notifications</p>
+                        </ul>
+                    </div>
+                </div>
+                <div class="acc">
+                    <a href="#"><img src="images/acc.webp" alt="Account"></a>
+                    <div class="dropdown">
+                        <ul>
+                            <li><a href="account.html">Profile</a></li>
+                            <li><a href="received_items.html">Orders</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="index.html">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Hamburger Button -->
+                    <div class="hamburger" onclick="toggleMenu()">
+                      ☰
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div class="mobile-menu" id="mobileMenu">
+                      <a href="homepage.html">Home</a>
+                      <a href="basket.html">Cart</a>
+                      <a href="received_items.html">Orders</a>
+                      <a href="#notif">Notifications</a>
+                      <a href="account.html">Account</a>
+                      <a href="login.html">Logout</a>
+                    </div>
+                     <div class="backdrop" id="backdrop" onclick="closeMenu()"></div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="order-details-container">
+        <h1>Review Your Order</h1>
+
+        <div class="product-summary">
+            <h3>Product Summary</h3>
+            <div id="cartItemsSummary">
+            </div>
+        </div>
+
+        <div class="shipping-payment">
+            <h3>Shipping Information</h3>
+            <div class="input-group">
+                <label for="shippingAddress">Shipping Address:</label>
+                <textarea id="shippingAddress" rows="3" placeholder="Enter your full address"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="contactNumber">Contact Number:</label>
+                <input type="tel" id="contactNumber" placeholder="Enter your phone number">
+            </div>
+
+            <h3>Payment Method</h3>
+            <div class="payment-methods">
+                <div class="payment-option">
+                    <label for="gcash" id="gcashLabel">
+                        <input type="radio" name="paymentMethod" value="gcash" id="gcash" checked>
+                        <img src="images/gcash.png" alt="GCash" style="height: 30px; margin-right: -10px;">
+                        GCash
+                    </label>
+                </div>
+                <div class="payment-option">
+                    <label for="credit_debit" id="credit_debitLabel">
+                        <input type="radio" name="paymentMethod" value="credit_debit" id="credit_debit">
+                        Credit/Debit Card
+                        <img src="images/credit.png" alt="Credit/Debit Card" style="height: 30px; margin-left: 5px;">
+                    </label>
+                </div>
+                <div class="payment-option">
+                    <label for="cod" id="codLabel">
+                        <input type="radio" name="paymentMethod" value="cod" id="cod">
+                        Cash on Delivery (COD)
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="order-summary">
+            <h3>Order Summary</h3>
+            <div class="summary-item">
+                <span>Subtotal:</span>
+                <strong id="subtotal">₱0.00</strong>
+            </div>
+            <div class="summary-item">
+                <span>Shipping Fee:</span>
+                <strong id="shippingFee">₱35.00</strong>
+            </div>
+            <div class="summary-item">
+                <span>Shipping To:</span>
+                <strong id="shippingToDisplay"></strong>
+            </div>
+            <div class="summary-item">
+                <span>Contact:</span>
+                <strong id="contactNumberDisplay"></strong>
+            </div>
+            <div class="total">
+                <span>Total:</span>
+                <strong id="totalAmount">₱0.00</strong>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button class="back-to-basket-button" onclick="window.location.href='basket.html'">< Back to Basket</button>
+            <button class="place-order-button" onclick="placeOrder()">Place Order</button>
+        </div>
+    </div>
+
+    <footer class="footer" style="margin-top: 238.5px;">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>CUSTOMER SERVICE</h4>
+                    <ul>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>ABOUT MKJE Shop</h4>
+                    <ul>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                        <li><a href="#">MKJE Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>PAYMENT</h4>
+                    <ul>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                        <li><a href="#">MKJE Pay</a></li>
+                    </ul>
+                </div>
+            </div><hr>
+            <p>&copy; 2025 MKJE Shop. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+    <script>
+    function loadCartSummary() {
+    const cartParam = new URLSearchParams(window.location.search).get('checkout');
+    let cart = [];
+    if (cartParam === 'selected') {
+        cart = JSON.parse(localStorage.getItem('selectedItemsForCheckout')) || [];
+    } else if (localStorage.getItem('buyNowProduct')) {
+        const buyNowProduct = JSON.parse(localStorage.getItem('buyNowProduct'));
+        if (buyNowProduct) {
+            cart = [buyNowProduct];
+            localStorage.removeItem('buyNowProduct'); // Clear immediately after loading
+        }
+    } else if (localStorage.getItem('currentOrder')) {
+        const currentOrder = JSON.parse(localStorage.getItem('currentOrder'));
+        if (currentOrder) {
+            cart = [currentOrder];
+            localStorage.removeItem('currentOrder'); // Clear immediately after loading
+        }
+    } else {
+        cart = JSON.parse(localStorage.getItem('cart')) || [];
+    }
+
+    const cartItemsSummaryDiv = document.getElementById('cartItemsSummary');
+    let subtotal = 0;
+
+    if (cart.length === 0) {
+        cartItemsSummaryDiv.innerHTML = '<p>No items in your order.</p>';
+        document.getElementById('subtotal').textContent = '₱0.00';
+        document.getElementById('totalAmount').textContent = '₱35.00';
+        return;
+    }
+
+    cartItemsSummaryDiv.innerHTML = '';
+    cart.forEach(item => {
+        const productItemDiv = document.createElement('div');
+        productItemDiv.classList.add('product-item');
+
+        const img = document.createElement('img');
+        img.src = item.img;
+        img.alt = item.name;
+        productItemDiv.appendChild(img);
+
+        const productInfoDiv = document.createElement('div');
+        productInfoDiv.classList.add('product-info');
+        productInfoDiv.innerHTML = `<p>${item.name}</p><p>₱${parseFloat(item.price).toFixed(2)}</p>`;
+        productItemDiv.appendChild(productInfoDiv);
+
+        const quantitySpan = document.createElement('span');
+        quantitySpan.classList.add('quantity-display');
+        quantitySpan.textContent = `x ${item.quantity || 1}`;
+        productItemDiv.appendChild(quantitySpan);
+
+        cartItemsSummaryDiv.appendChild(productItemDiv);
+        subtotal += parseFloat(item.price) * (item.quantity || 1);
+    });
+
+    document.getElementById('subtotal').textContent = `₱${subtotal.toFixed(2)}`;
+    updateTotal(subtotal);
+
+    // Load and display saved shipping info if available
+    const savedShippingAddress = localStorage.getItem('shippingAddress');
+    const savedContactNumber = localStorage.getItem('contactNumber');
+    if (savedShippingAddress) {
+        document.getElementById('shippingAddress').value = savedShippingAddress;
+        document.getElementById('shippingToDisplay').textContent = savedShippingAddress;
+    }
+    if (savedContactNumber) {
+        document.getElementById('contactNumber').value = savedContactNumber;
+        document.getElementById('contactNumberDisplay').textContent = savedContactNumber;
+    }
+
+    // Highlight the initially selected payment method
+    const initialPayment = document.querySelector('input[name="paymentMethod"]:checked').value;
+    highlightSelectedPayment(initialPayment);
+
+    // Add event listeners to payment radio buttons for highlighting
+    const paymentRadios = document.querySelectorAll('input[name="paymentMethod"]');
+    paymentRadios.forEach(radio => {
+        radio.addEventListener('change', (event) => {
+            highlightSelectedPayment(event.target.value);
+        });
+    });
+}
+
+function updateTotal(subtotal) {
+    const shippingFee = 35.00;
+    const totalAmount = subtotal + shippingFee;
+    document.getElementById('totalAmount').textContent = `₱${totalAmount.toFixed(2)}`;
+}
+
+function highlightSelectedPayment(paymentMethod) {
+    document.getElementById('gcashLabel').classList.remove('selected-payment');
+    document.getElementById('credit_debitLabel').classList.remove('selected-payment');
+    document.getElementById('codLabel').classList.remove('selected-payment');
+
+    const labelId = paymentMethod === 'gcash' ? 'gcashLabel' :
+                      paymentMethod === 'credit_debit' ? 'credit_debitLabel' :
+                      paymentMethod === 'cod' ? 'codLabel' : null;
+
+    if (labelId) {
+        document.getElementById(labelId).classList.add('selected-payment');
+    }
+}
+
+function placeOrder() {
+    const shippingAddress = document.getElementById('shippingAddress').value;
+    const contactNumber = document.getElementById('contactNumber').value;
+    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+    const cartParam = new URLSearchParams(window.location.search).get('checkout');
+    let orderedItems = [];
+    let storageKeyToRemove = null;
+    const totalAmount = document.getElementById('totalAmount').textContent;
+
+    if (!shippingAddress) {
+        alert('Please enter your shipping address.');
+        return;
+    }
+    if (!contactNumber) {
+        alert('Please enter your contact number.');
+        return;
+    }
+    if (!/^\d+$/.test(contactNumber) || contactNumber.length < 7) {
+        alert('Please enter a valid contact number (numbers only, at least 7 digits).');
+        return;
+    }
+
+    if (cartParam === 'selected') {
+        orderedItems = JSON.parse(localStorage.getItem('selectedItemsForCheckout')) || [];
+        storageKeyToRemove = 'selectedItemsForCheckout';
+    } else if (localStorage.getItem('buyNowProduct')) {
+        orderedItems = [JSON.parse(localStorage.getItem('buyNowProduct'))];
+        storageKeyToRemove = 'buyNowProduct';
+    } else if (localStorage.getItem('currentOrder')) {
+        orderedItems = [JSON.parse(localStorage.getItem('currentOrder'))];
+        storageKeyToRemove = 'currentOrder';
+    } else {
+        orderedItems = JSON.parse(localStorage.getItem('cart')) || [];
+        storageKeyToRemove = 'cart';
+    }
+
+    if (orderedItems.length === 0) {
+        alert('No items to order.');
+        return;
+    }
+
+    // Save shipping info to localStorage
+    localStorage.setItem('shippingAddress', shippingAddress);
+    localStorage.setItem('contactNumber', contactNumber);
+
+    const now = new Date();
+    const shipmentDate = new Date(now);
+    shipmentDate.setDate(now.getDate() + 2); // Example: Ships in 2 days
+
+    const newOrder = {
+        orderId: Math.random().toString(36).substring(7).toUpperCase(),
+        items: orderedItems,
+        shippingAddress: shippingAddress,
+        contactNumber: contactNumber,
+        paymentMethod: paymentMethod,
+        totalAmount: totalAmount,
+        status: 'to_ship',
+        orderDate: now.toISOString().split('T')[0],
+        shipmentDate: shipmentDate.toISOString().split('T')[0]
+    };
+
+    let receivedOrders = JSON.parse(localStorage.getItem('received')) || [];
+    receivedOrders.unshift(newOrder);
+    localStorage.setItem('received', JSON.stringify(receivedOrders));
+
+    alert(`Order placed and will be shipped soon!\nOrder ID: ${newOrder.orderId}\nShipping to: ${shippingAddress}\nContact: ${contactNumber}\nPayment Method: ${paymentMethod}\nTotal Amount: ${totalAmount}`);
+
+    if (storageKeyToRemove) {
+        localStorage.removeItem(storageKeyToRemove);
+    }
+
+    if (cartParam === 'selected') {
+        const mainCart = JSON.parse(localStorage.getItem('cart')) || [];
+        const selectedItemsCheckout = JSON.parse(localStorage.getItem('selectedItemsForCheckout')) || [];
+        if (mainCart.length === selectedItemsCheckout.length && mainCart.length > 0) {
+            localStorage.removeItem('cart');
+        }
+        localStorage.removeItem('selectedItemsForCheckout');
+    } else if (localStorage.getItem('buyNowProduct')) {
+        localStorage.removeItem('buyNowProduct');
+    } else if (localStorage.getItem('currentOrder')) {
+        localStorage.removeItem('currentOrder');
+    } else {
+        localStorage.removeItem('cart');
+    }
+
+    window.location.href = 'received_items.html';
+}
+
+// Clear temporary storage when navigating away from the page
+window.addEventListener('beforeunload', () => {
+    const cartParam = new URLSearchParams(window.location.search).get('checkout');
+    if (cartParam === 'selected') {
+        // Do nothing — handled on order placement
+    } else if (localStorage.getItem('buyNowProduct')) {
+        localStorage.removeItem('buyNowProduct');
+    } else if (localStorage.getItem('currentOrder')) {
+        localStorage.removeItem('currentOrder');
+    }
+});
+
+// Initialize on page load
+window.addEventListener('DOMContentLoaded', loadCartSummary);
+function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const backdrop = document.getElementById('backdrop');
+    
+            menu.classList.toggle('show');
+            hamburger.classList.toggle('hide');
+            backdrop.style.display = menu.classList.contains('show') ? 'block' : 'none';
+        }
+    
+        function closeMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            const backdrop = document.getElementById('backdrop');
+    
+            menu.classList.remove('show');
+            hamburger.classList.remove('hide');
+            backdrop.style.display = 'none';
+        }
+</script>
+</body>
+</html>
